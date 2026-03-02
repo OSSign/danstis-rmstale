@@ -42,8 +42,8 @@ jobs:
       - name: Build application
         shell: bash
         run: |
-          GOARCH=amd64 go build -o -s -w -X main.AppVersion==${{ github.event.inputs.release_name }} -o rmstale-amd64.exe ./rmstale.go
-          GOARCH=arm64 go build -o -s -w -X main.AppVersion==${{ github.event.inputs.release_name }} -o rmstale-arm64.exe ./rmstale.go
+          GOARCH=amd64 go build -ldflags="-s -w -X main.AppVersion==${{ github.event.inputs.release_name }}" -o rmstale-amd64.exe ./rmstale.go
+          GOARCH=arm64 go build -ldflags="-s -w -X main.AppVersion==${{ github.event.inputs.release_name }}" -o rmstale-arm64.exe ./rmstale.go
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -95,5 +95,6 @@ jobs:
             The source code was fetched from https://github.com/${{ env.SOURCE_REPOSITORY }}@${{ github.event.inputs.source_branch }}
             
           
+
 
 
